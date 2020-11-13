@@ -2,9 +2,11 @@
 
 > A lightweight YOLOv3. <br>
 
+![result.jpg](https://i.loli.net/2020/11/13/Tr7IR2bW8Bk4gDN.jpg)
+
 ## 1. Quick Start.
 
-1. Clone the repositorie.
+1. Clone the repository.
 
 ```python
 $ git clone https://github.com/Runist/YOLOv3.git
@@ -64,7 +66,6 @@ If your want to change picture path, please edit predict.py:
 if __name__ == '__main__':
     img_path = "Your image path."
 ```
-![result.jpg](https://i.loli.net/2020/11/13/Tr7IR2bW8Bk4gDN.jpg)
 ## 4. Reference.
 
 - [bubbliiiing/yolo3-keras](https://github.com/bubbliiiing/yolo3-keras)
