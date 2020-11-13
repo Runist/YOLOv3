@@ -29,7 +29,7 @@ $ wget https://github.com/Runist/YOLOv3/releases/download/v1.0/voc_weight.h5
 
 One files are required as follows:
 
-- [`train.txt`](https://github.com/Runist/YOLOv3/config/trian.txt): 
+- [`train.txt`](https://github.com/Runist/YOLOv3/blob/main/config/train.txt): 
 
 ```
 xxx/xxx.jpg 174,101,349,351,14
