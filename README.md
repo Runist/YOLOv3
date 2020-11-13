@@ -8,20 +8,20 @@
 
 1. Clone the repository.
 
-```python
+```
 $ git clone https://github.com/Runist/YOLOv3.git
 ```
 
 2. You are supposed to install some dependencies before getting out hands with these codes.
 
-```python
+```
 $ cd YOLOv3
-$ pip install -r ./requirements.txt
+$ pip install -r requirements.txt
 ```
 
 3. Download VOC weights.
 
-```Python
+```
 $ wget https://github.com/Runist/YOLOv3/releases/download/v1.0/voc_weight.h5
 ```
 
@@ -40,14 +40,14 @@ xxx/xxx.jpg 104,78,375,183,0 133,88,197,123,0 195,180,213,229,14 26,189,44,238,1
 
 And you need edit config.py:
 
-```pYTHON
+```python
 annotation_path = "./config/train.txt"
 class_names = ['aeroplane', 'bicycle', 'bird', 'boat', 'bottle', 'bus', 'car', 'cat', 'chair', 'cow', 'diningtable', 'dog', 'horse', 'motorbike', 'person', 'pottedplant', 'sheep', 'sofa', 'train', 'tvmonitor']
 ```
 
 Finally
 
-```python
+```
 $ mkdir logs
 $ cd logs
 $ mkdir model
@@ -56,7 +56,7 @@ $ python train.py
 
 ## 3. Show your predict result.
 
-```python
+```
 $ python predict.py
 ```
 
