@@ -240,48 +240,29 @@ class DataReader:
         数据生成器
         :return: image, rpn训练标签， 真实框数据
         """
-        if mode == 'train':
-            n = len(self.train_lines)
-            i = 0
-            while True:
-                image_data = []
-                box_data = []
-                for b in range(self.batch_size):
-                    if i == 0:
-                        np.random.shuffle(self.train_lines)
+        n = len(self.train_lines)
+        i = 0
+        while True:
+            image_data = []
+            box_data = []
+            for b in range(self.batch_size):
+                if i == 0:
+                    np.random.shuffle(self.train_lines)
+                if mode == 'train':
                     image, bbox = self.get_random_data(self.train_lines[i])
-                    image_data.append(image)
-                    box_data.append(bbox)
-
-                    i = (i + 1) % n
-
-                image_data = np.array(image_data)
-                box_data = np.array(box_data)
-
-                box_data = self.process_true_bbox(box_data)
-
-                yield image_data, box_data
-        else:
-            n = len(self.validation_lines)
-            i = 0
-            while True:
-                image_data = []
-                box_data = []
-                for b in range(self.batch_size):
-                    if i == 0:
-                        np.random.shuffle(self.validation_lines)
+                else:
                     image, bbox = self.get_data(self.validation_lines[i])
-                    image_data.append(image)
-                    box_data.append(bbox)
+                image_data.append(image)
+                box_data.append(bbox)
 
-                    i = (i + 1) % n
+                i = (i + 1) % n
 
-                image_data = np.array(image_data)
-                box_data = np.array(box_data)
+            image_data = np.array(image_data)
+            box_data = np.array(box_data)
 
-                box_data = self.process_true_bbox(box_data)
+            box_data = self.process_true_bbox(box_data)
 
-                yield image_data, box_data
+            yield image_data, box_data
 
 
 def rand(small=0., big=1.):

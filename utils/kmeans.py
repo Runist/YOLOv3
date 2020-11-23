@@ -97,31 +97,13 @@ def kmeans(boxes, k, dist=np.median):
     return clusters
 
 
-def result2txt(data):
-    """
-    转换成txt文档
-    :param data:
-    :return:
-    """
-    f = open(cfg.anchors_path, 'w')
-    row = np.shape(data)[0]
-    for i in range(row):
-        if i == 0:
-            x_y = "%d,%d" % (data[i][0], data[i][1])
-        else:
-            x_y = ", %d,%d" % (data[i][0], data[i][1])
-        f.write(x_y)
-    f.close()
-
-
 if __name__ == '__main__':
     cluster_number = 9
-    all_boxes = txt2boxes(cfg.annotation_path)
+    all_boxes = txt2boxes('.' + cfg.annotation_path)
     result = kmeans(all_boxes, cluster_number)
     # 排序，以行为准排序，不会改变顺序
 
     anchors = sorted(result.tolist(), key=(lambda x: x[0] + x[1]))
-    result2txt(anchors)
     print("K anchors:\n {}".format(anchors))
     print("Accuracy: {:.2f}%".format(avg_iou(all_boxes, result, cluster_number) * 100))
 
