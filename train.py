@@ -54,7 +54,7 @@ def train_by_fit(optimizer, loss, train_data, train_steps, validation_data, vali
     cbk = [
         callbacks.ReduceLROnPlateau(verbose=1),
         callbacks.EarlyStopping(patience=10, verbose=1),
-        callbacks.ModelCheckpoint('./logs/model/yolov3_{val_loss:.04f}.h5', save_best_only=True, save_weights_only=True)
+        callbacks.ModelCheckpoint('./model/yolov3_{val_loss:.04f}.h5', save_best_only=True, save_weights_only=True)
     ]
 
     model = yolo_body()

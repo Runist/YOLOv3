@@ -22,7 +22,7 @@ class DataReader:
         self.train_lines, self.validation_lines = self.read_data_and_split_data()
 
     def read_data_and_split_data(self):
-        with open(self.data_path, "r") as f:
+        with open(self.data_path, "r", encoding='utf-8') as f:
             files = f.readlines()
 
         split = int(cfg.valid_rate * len(files))
@@ -240,18 +240,24 @@ class DataReader:
         数据生成器
         :return: image, rpn训练标签， 真实框数据
         """
-        n = len(self.train_lines)
+        if mode == 'train':
+            n = len(self.train_lines)
+        else:
+            n = len(self.validation_lines)
+
         i = 0
         while True:
             image_data = []
             box_data = []
+
+            if i == 0:
+                np.random.shuffle(self.train_lines)
             for b in range(self.batch_size):
-                if i == 0:
-                    np.random.shuffle(self.train_lines)
                 if mode == 'train':
                     image, bbox = self.get_random_data(self.train_lines[i])
                 else:
                     image, bbox = self.get_data(self.validation_lines[i])
+
                 image_data.append(image)
                 box_data.append(bbox)
 
