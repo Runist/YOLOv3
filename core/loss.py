@@ -7,7 +7,7 @@
 
 import tensorflow as tf
 import config.config as cfg
-from nets.model import yolo_body, yolo_head
+from nets.yolo import yolo_body, yolo_head
 
 
 def box_iou(pred_box, true_box):

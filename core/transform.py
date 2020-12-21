@@ -7,7 +7,7 @@
 
 import tensorflow as tf
 import config.config as cfg
-from nets.model import yolo_head
+from nets.yolo import yolo_head
 
 
 def parse_yolov3_output(yolo_outputs, image_shape, score_threshold, max_boxes=20):

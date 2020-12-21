@@ -9,7 +9,7 @@ import tensorflow as tf
 import config.config as cfg
 from core.dataReader import DataReader
 from core.loss import YoloLoss
-from nets.model import yolo_body
+from nets.yolo import yolo_body
 
 import os
 from tensorflow.keras import optimizers, callbacks, metrics

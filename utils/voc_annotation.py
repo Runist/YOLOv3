@@ -12,16 +12,14 @@ import random
 import os
 
 
-def convert_annotation(year, image_id, list_file):
+def convert_annotation(xml_path, list_file):
     """
     把单个xml转换成annotation格式
-    :param year: 图片的年份
-    :param image_id: 图片id
+    :param xml_path: xml的路径
     :param list_file: 写入的文件句柄
     :return: None
     """
-    in_file = open('D:/Python_Code/Tensorflow2.0/YOLOv3/VOCdevkit/VOC%s/Annotations/%s.xml' % (year, image_id))
-    tree = ET.parse(in_file)
+    tree = ET.parse(xml_path)
     root = tree.getroot()
 
     for obj in root.iter('object'):
@@ -45,10 +43,10 @@ def convert_annotation(year, image_id, list_file):
 
 if __name__ == '__main__':
     # VOC数据集的路径
-    xmlfilepath = 'D:/Python_Code/Tensorflow2.0/YOLOv3/VOCdevkit/VOC2012/Annotations'
-    temp_xml = os.listdir(xmlfilepath)
+    xml_file_path = 'D:/Python_Code/Dataset/VOCdevkit/VOC2012/Annotations'
+    xml_list = os.listdir(xml_file_path)
     total_xml = []
-    for xml in temp_xml:
+    for xml in xml_list:
         if xml.endswith(".xml"):
             total_xml.append(xml)
 
@@ -80,10 +78,9 @@ if __name__ == '__main__':
     for key, value in image_ids.items():
         files = open('../config/{}.txt'.format(key), 'w')
         for image_id in value:
-            files.write('D:/Python_Code/Tensorflow2.0/YOLOv3/VOCdevkit/VOC{}/JPEGImages/{}.jpg'.format("2012", image_id))
-            try:
-                convert_annotation(2012, image_id, files)
-            except:
-                pass
+            img_path = 'D:/Python_Code/Dataset/VOCdevkit/VOC2012/JPEGImages/{}.jpg'.format(image_id)
+            xml_path = '{}/{}.xml'.format(xml_file_path, image_id)
+            files.write(img_path)
+            convert_annotation(xml_path,  files)
             files.write('\n')
         files.close()
