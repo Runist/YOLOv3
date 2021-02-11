@@ -24,12 +24,7 @@ def convert_annotation(xml_path, list_file):
 
     for obj in root.iter('object'):
 
-        difficult = obj.find('difficult').text
         cls = obj.find('name').text
-        # 不在分类内部的不要，难度为1的也不要
-        if cls not in cfg.class_names or int(difficult) == 1:
-            continue
-
         cls_id = cfg.class_names.index(cls)
         xmlbox = obj.find('bndbox')
 
@@ -43,7 +38,7 @@ def convert_annotation(xml_path, list_file):
 
 if __name__ == '__main__':
     # VOC数据集的路径
-    xml_file_path = 'D:/Python_Code/Dataset/VOCdevkit/VOC2012/Annotations'
+    xml_file_path = 'C:/Software/Code/Work_Python/Dataset/VOCdevkit/VOC2012/Annotations'
     xml_list = os.listdir(xml_file_path)
     total_xml = []
     for xml in xml_list:
@@ -78,7 +73,7 @@ if __name__ == '__main__':
     for key, value in image_ids.items():
         files = open('../config/{}.txt'.format(key), 'w')
         for image_id in value:
-            img_path = 'D:/Python_Code/Dataset/VOCdevkit/VOC2012/JPEGImages/{}.jpg'.format(image_id)
+            img_path = 'C:/Software/Code/Work_Python/Dataset/VOCdevkit/VOC2012/JPEGImages/{}.jpg'.format(image_id)
             xml_path = '{}/{}.xml'.format(xml_file_path, image_id)
             files.write(img_path)
             convert_annotation(xml_path,  files)

@@ -12,7 +12,7 @@ import os
 from PIL import Image, ImageFont, ImageDraw
 from timeit import default_timer as timer
 
-from nets.model import yolo_body
+from nets.yolo import yolo_body
 from core.transform import parse_yolov3_output
 
 
@@ -21,7 +21,7 @@ class Yolov3Predict(object):
     def __init__(self, model_path):
         self.class_names = cfg.class_names
         self.anchors = cfg.anchors
-        self.score = 0.1
+        self.score = 0.5
 
         model = yolo_body()
         model.load_weights(model_path)
@@ -138,9 +138,9 @@ class Yolov3Predict(object):
 
 
 if __name__ == '__main__':
-    img_path = "Your path."
+    img_path = "Your image path."
 
-    yolo = Yolov3Predict('./logs/model/yolov3.h5')
+    yolo = Yolov3Predict('./model/yolov3.h5')
 
     if not os.path.exists(img_path):
         print("Error,image path is not exists.")
